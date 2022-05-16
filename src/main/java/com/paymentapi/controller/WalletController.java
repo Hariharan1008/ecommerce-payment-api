@@ -1,5 +1,7 @@
 package com.paymentapi.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.paymentapi.dto.Message;
 import com.paymentapi.model.Wallet;
+import com.paymentapi.model.WalletTransaction;
 import com.paymentapi.service.WalletService;
 
 @RestController
@@ -164,6 +167,56 @@ public class WalletController {
 		}
 	}
 	
+	@GetMapping("wallet/verify/user/login")
+	public ResponseEntity<?> verifyUserLogin(@RequestParam("mobile") long mobile)
+	{
+		try
+		{
+			int updated=walletService.userLoginVerification(mobile);
+			if(updated==1)
+			{
+			  return new ResponseEntity<>(HttpStatus.OK);
+			}
+			else
+			{
+				  Message message=new Message();
+				  message.setMessage("can not process your request at this time");
+				  return new ResponseEntity<>(message,HttpStatus.BAD_REQUEST);
+			}
+		}
+		catch(Exception e)
+		{
+			 Message message=new Message();
+			 message.setMessage(e.getMessage());
+			 return new ResponseEntity<>(message,HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	
+	@GetMapping("wallet/user/all/transactions")
+	public ResponseEntity<?> getAllWalletTransactions(@RequestParam("mobile") long mobile)
+	{
+		try
+		{
+			List<WalletTransaction> transaction=walletService.getAllTransactions(mobile);
+			if(transaction!=null)
+			{
+				return new ResponseEntity<>(transaction,HttpStatus.OK);
+			}
+			else
+			{
+				  Message message=new Message();
+				  message.setMessage("can not process your request at this time");
+				  return new ResponseEntity<>(message,HttpStatus.BAD_REQUEST);
+			}
+		}
+		catch(Exception e)
+		{
+			 Message message=new Message();
+			 message.setMessage(e.getMessage());
+			 return new ResponseEntity<>(message,HttpStatus.BAD_REQUEST);
+		}
+	}
 	
 
 }

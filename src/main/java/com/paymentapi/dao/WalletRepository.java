@@ -28,4 +28,9 @@ public interface WalletRepository extends JpaRepository<Wallet,Integer> {
 	@Query("update com.paymentapi.model.Wallet u set u.transactionPin=:tpin where u.mobile=:mobile")
     void updateTransactionPin(@Param("tpin") int tpin,@Param("mobile") long mobile);
 	
+	@Query("select u from com.paymentapi.model.Wallet u where u.mobile=:mobile")
+	Wallet getWalletDetails(@Param("mobile") long mobile);
+	
+	
+	
 }
