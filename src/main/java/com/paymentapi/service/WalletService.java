@@ -3,6 +3,7 @@ package com.paymentapi.service;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -112,5 +113,31 @@ public class WalletService {
 	  walletRepository.updateTransactionPin(tpin, mobile);
 	  return 1;
   }
+  public int userLoginVerification(long mobile) throws Exception
+  {
+	 Wallet wallet=walletRepository.getWalletDetails(mobile);
+	 if(wallet!=null)
+	 {
+		 return 1;
+	 }
+	 else
+	 {
+		 throw new Exception("already user found");
+	 }
+  }
+  
+  public List<WalletTransaction> getAllTransactions(long mobile) throws Exception
+  {
+	  List<WalletTransaction> transactions=transactionRepository.getAllTransactions(mobile);
+	  if(transactions!=null)
+	  {
+		  return transactions;
+	  }
+	  else
+	  {
+		  throw new Exception("no records found");
+	  }
+  }
+  
    
 }
