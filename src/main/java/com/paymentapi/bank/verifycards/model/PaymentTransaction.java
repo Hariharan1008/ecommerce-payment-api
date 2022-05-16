@@ -9,8 +9,6 @@ import org.springframework.stereotype.Component;
 import lombok.Data;
 import lombok.ToString;
 
-//Bank
-
 @Data
 @ToString
 @Component

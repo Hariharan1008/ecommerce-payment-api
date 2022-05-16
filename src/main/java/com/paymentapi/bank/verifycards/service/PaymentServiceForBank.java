@@ -10,8 +10,6 @@ import com.paymentapi.bank.verifycards.dao.TransactionRepository;
 import com.paymentapi.bank.verifycards.model.BankDetails;
 import com.paymentapi.bank.verifycards.model.PaymentTransaction;
 
-//Hari
-
 @Component
 public class PaymentServiceForBank {
 
