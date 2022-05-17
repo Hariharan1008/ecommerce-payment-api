@@ -49,7 +49,7 @@ public class PaymentControllerForBank {
 
 	
 	
-	@GetMapping("transaction/details")
+	@PostMapping("transaction/details")
 	public List<PaymentTransaction> transaction(@RequestBody PaymentTransaction details) {
 
 		
