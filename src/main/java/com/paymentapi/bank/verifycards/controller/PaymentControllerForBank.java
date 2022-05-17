@@ -54,10 +54,13 @@ public class PaymentControllerForBank {
 
 		
 		
-		
+		try {
 		List<PaymentTransaction> transactiondetails = 	(obj.findByCardNumber(details.getCardNumber()));	
-		
+		System.out.println(transactiondetails);
 		return transactiondetails;
+		}catch(Exception e) {
+			return null; 
+		}
 		
 	}
 	
